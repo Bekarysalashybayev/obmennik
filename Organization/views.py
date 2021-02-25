@@ -59,3 +59,39 @@ def get_org_sved_html(request):
     }
     html_template = loader.get_template('org_svedenye.html')
     return HttpResponse(html_template.render(context, request))
+
+
+def clients_html(request):
+    list = Client.objects.all()
+    context = {
+        'list': list
+    }
+    html_template = loader.get_template('clients.html')
+    return HttpResponse(html_template.render(context, request))
+
+
+def valut_clients_html(request):
+    list = ClientValutaAccount.objects.all()
+    context = {
+        'list': list
+    }
+    html_template = loader.get_template('valut_clients.html')
+    return HttpResponse(html_template.render(context, request))
+
+
+def banks_html(request):
+    list = Bank.objects.all()
+    context = {
+        'list': list
+    }
+    html_template = loader.get_template('banks.html')
+    return HttpResponse(html_template.render(context, request))
+
+
+def dogovor_html(request):
+    list = Contract.objects.all()
+    context = {
+        'list': list,
+    }
+    html_template = loader.get_template('dogovor.html')
+    return HttpResponse(html_template.render(context, request))
