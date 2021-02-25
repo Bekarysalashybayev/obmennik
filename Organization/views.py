@@ -95,3 +95,21 @@ def dogovor_html(request):
     }
     html_template = loader.get_template('dogovor.html')
     return HttpResponse(html_template.render(context, request))
+
+
+def operations_html(request):
+    list = Operation.objects.all()
+    context = {
+        'list': list,
+    }
+    html_template = loader.get_template('operations.html')
+    return HttpResponse(html_template.render(context, request))
+
+
+def curs_valuta_html(request):
+    list = CursValuta.objects.all()
+    context = {
+        'list': list,
+    }
+    html_template = loader.get_template('valut_curs.html')
+    return HttpResponse(html_template.render(context, request))

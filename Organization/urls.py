@@ -11,4 +11,6 @@ urlpatterns = [
     path('clients/valuta/account', valut_clients_html, name='valut_clients_html'),
     path('banks/', banks_html, name='banks_html'),
     path('contracts/', dogovor_html, name='dogovor_html'),
+    path('operations/', operations_html, name='operations_html'),
+    path('curs_valuta/', curs_valuta_html, name='curs_valuta_html'),
 ]
