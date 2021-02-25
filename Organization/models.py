@@ -108,6 +108,7 @@ class Session(models.Model):
     date = models.DateField()
     sotrudnik = models.ForeignKey(Sotrudnik, on_delete=models.CASCADE)
     cursValuta = models.ForeignKey(CursValuta, on_delete=models.CASCADE)
+    operation = models.ForeignKey(Operation, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return str(self.sotrudnik)

@@ -17,4 +17,5 @@ urlpatterns = [
     path('operations/', operations_html, name='operations_html'),
     path('curs_valuta/', curs_valuta_html, name='curs_valuta_html'),
     path('employees_info/', employees_info_html, name='employees_info'),
+    path('operation_pokupki/<id>', operation_pokupki, name='operation_pokupki'),
 ]

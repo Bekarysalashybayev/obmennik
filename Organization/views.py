@@ -179,10 +179,20 @@ def curs_valuta_html(request):
 
 
 def employees_info_html(request):
-
     operations = Operation.objects.all()
     context = {
         'list': operations,
     }
     html_template = loader.get_template('employess_info.html')
+    return HttpResponse(html_template.render(context, request))
+
+
+def operation_pokupki(request, id: int):
+
+    operations = Session.objects.filter(operation__category_id=id)
+    context = {
+        'list': operations,
+        'vid': "Покупки" if int(id) == 2 else "Продажи",
+    }
+    html_template = loader.get_template('operation_pokupki.html')
     return HttpResponse(html_template.render(context, request))

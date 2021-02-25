@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load mathfilters %}
+
+{% block content %}
+  <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Отчет Информация о клиентах</h3>
+
+                <div class="card-tools">
+                  <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                    <div class="input-group-append">
+                      <button type="submit" class="btn btn-default">
+                        <i class="fas fa-search"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>№</th>
+                      <th>Код операции</th>
+                      <th>Вид операции</th>
+                      <th>Дата операции</th>
+                      <th>Сумма в валюте</th>
+                      <th>Сумма в тенге</th>
+                      <th>Сумма по курсу ЦБ</th>
+                      <th>Прибыль от {{ vid }}</th>
+                      <th>Наименование Организации</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for item in list %}
+                    <tr>
+                      <td>{{ item.operation.contract.pk }}</td>
+                      <td>{{ item.operation.code }}</td>
+                      <td>{{ item.operation.category.name }}</td>
+                      <td>{{ item.operation.date }}</td>
+                      <td>{{ item.operation.sum }}</td>
+                      {% if vid == "Продажи" %}
+                      <td>{{ item.operation.sum|mul:item.cursValuta.cursProd  }}</td>
+                          <td>{{ item.operation.sum|mul:item.cursValuta.curs }}</td>
+                    {% with var=item.operation.sum|mul:item.cursValuta.cursProd var2=item.operation.sum|mul:item.cursValuta.curs %}
+                         <td>{{ var|sub:var2 }}</td>
+                    {% endwith %}
+                      {% else %}
+                      <td>{{ item.operation.sum|mul:item.cursValuta.cursPokup  }}</td>
+                          <td>{{ item.operation.sum|mul:item.cursValuta.curs }}</td>
+                    {% with var=item.operation.sum|mul:item.cursValuta.cursPokup var2=item.operation.sum|mul:item.cursValuta.curs %}
+                         <td>{{ var|sub:var2 }}</td>
+                    {% endwith %}
+                      {% endif %}
+
+                    {{ var }}
+
+
+                      <td>{{ item.operation.contract.code_organization.name }}</td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+{% endblock %}
