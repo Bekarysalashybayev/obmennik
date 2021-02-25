@@ -1,9 +1,12 @@
 import io
 
 from django.http import FileResponse, HttpResponse
+from django.template import loader
 from reportlab.pdfbase import ttfonts, pdfmetrics
 from reportlab.pdfgen import canvas
 from rest_framework.generics import ListAPIView
+from django.shortcuts import render
+from .models import Valuta
 
 from .serializers import *
 
@@ -37,3 +40,22 @@ def some_view(request):
     # FileResponse sets the Content-Disposition header so that browsers
     # present the option to save the file.
     return response
+
+
+def get_base_html(request):
+    return render(request, 'base.html', {})
+
+
+def get_currency(request):
+    if request.method == "GET":
+        valuta = Valuta.objects.all()
+        return render(request, 'base.html', {"valuta": valuta})
+
+
+def get_org_sved_html(request):
+    list = Organization.objects.all()
+    context = {
+        'list': list
+    }
+    html_template = loader.get_template('org_svedenye.html')
+    return HttpResponse(html_template.render(context, request))
