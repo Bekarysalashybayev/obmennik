@@ -138,3 +138,15 @@ def dogovor_html(request):
     }
     html_template = loader.get_template('dogovor.html')
     return HttpResponse(html_template.render(context, request))
+
+
+class SessionsView(ListView):
+    model = Session
+    template_name = 'sessions.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(SessionsView, self).get_context_data(**kwargs)
+        context['object_list_name'] = ["Дата сессии", "Код сотрудник"]
+        context['name'] = "Сессии"
+
+        return context
