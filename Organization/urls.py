@@ -10,4 +10,8 @@ urlpatterns = [
     path('organization-valuta-accounts/', OrganizationValutaAccountView.as_view(), name='organization_valuta_accounts'),
     path('employees/', EmployeesView.as_view(), name='employees'),
     path('currency/', CurrencyView.as_view(), name='currency'),
+    path('clients/', clients_html, name='clients_html'),
+    path('clients/valuta/account', valut_clients_html, name='valut_clients_html'),
+    path('banks/', banks_html, name='banks_html'),
+    path('contracts/', dogovor_html, name='dogovor_html'),
 ]
