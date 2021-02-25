@@ -4,7 +4,6 @@ from .views import *
 
 urlpatterns = [
     path('userinfo/', UserInfoView.as_view(), name='GetUserInfo'),
-    path('pdf/', some_view, name='GetUserInfo'),
     path('base/', get_base_html, name='get_base_html'),
     path('organization/svedeniye/', get_org_sved_html, name='get_org_sved_html'),
     path('organization-valuta-accounts/', OrganizationValutaAccountView.as_view(), name='organization_valuta_accounts'),
@@ -17,4 +16,5 @@ urlpatterns = [
     path('contracts/', dogovor_html, name='dogovor_html'),
     path('operations/', operations_html, name='operations_html'),
     path('curs_valuta/', curs_valuta_html, name='curs_valuta_html'),
+    path('employees_info/', employees_info_html, name='employees_info'),
 ]

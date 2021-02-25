@@ -5,7 +5,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Responsive Hover Table</h3>
+                <h3 class="card-title">Отчет Информация о клиентах</h3>
 
                 <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
@@ -24,17 +24,25 @@
                 <table class="table table-hover text-nowrap">
                   <thead>
                     <tr>
+                      <th>Код клиента </th>
+                      <th>ФИО клиента</th>
                       <th>Номер договора</th>
-                      <th>Дата договора</th>
-                      <th>Операций этого договора</th>
+                      <th>Дата составление</th>
+                      <th>Валюта</th>
+                      <th>Вид операции</th>
+                      <th>Сумма</th>
                     </tr>
                   </thead>
                   <tbody>
                   {% for item in list %}
                     <tr>
-                      <td>{{ item.pk }}</td>
-                      <td>{{ item.date }}</td>
-                      <td><a href="/obmennik/operations/?contract_id={{ item.pk }}">Операции</a></td>
+                      <td>{{ item.contract.code_client.code }}</td>
+                      <td>{{ item.contract.code_client.fio }}</td>
+                      <td>{{ item.contract.pk }}</td>
+                      <td>{{ item.contract.date }}</td>
+                      <td>{{ item.code_valuta.name }}</td>
+                      <td>{{ item.category.name }}</td>
+                      <td>{{ item.sum }}</td>
                     </tr>
                   {% endfor %}
                   </tbody>
