@@ -24,24 +24,26 @@
                 <table class="table table-hover text-nowrap">
                   <thead>
                     <tr>
-                      <th>Код Валюты </th>
-                      <th>Код Клиента</th>
-                      <th>Номер валютного счета</th>
-                      <th>БИК</th>
+                      <th>Код операции</th>
+                      <th>Вид операции</th>
+                      <th>Дата операции</th>
+                      <th>Код Валюты</th>
+                      <th>Номер договора</th>
                     </tr>
                   </thead>
                   <tbody>
                   {% for item in list %}
                     <tr>
+                      <td>{{ item.code }}</td>
+                      <td>{{ item.category.name }}</td>
+                      <td>{{ item.date }}</td>
                       <td>
                           <select style="width: 100%;">
                               <option>{{ item.code_valuta.code }}</option>
                               <option>{{ item.code_valuta.name }}</option>
                           </select>
                       </td>
-                      <td>{{ item.code_client.code }}</td>
-                      <td>{{ item.bik.bik }}</td>
-                      <td>{{ item.account_number }}</td>
+                      <td>{{ item.contract.pk }}</td>
                     </tr>
                   {% endfor %}
                   </tbody>
