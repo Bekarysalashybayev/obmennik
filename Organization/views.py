@@ -95,7 +95,7 @@ class EmployeesView(ListView):
 
 class CurrencyView(ListView):
     model = Valuta
-    template_name = 'employess.html'
+    template_name = 'currency.html'
 
     def get_context_data(self, **kwargs):
         context = super(CurrencyView, self).get_context_data(**kwargs)
@@ -162,7 +162,11 @@ def operations_html(request):
 
 
 def curs_valuta_html(request):
-    list = CursValuta.objects.all()
+    valute_id = request.GET.get('valute_id')
+    if valute_id:
+        list = CursValuta.objects.filter(code_valuta_id=valute_id)
+    else:
+        list = CursValuta.objects.all()
     context = {
         'list': list,
     }
