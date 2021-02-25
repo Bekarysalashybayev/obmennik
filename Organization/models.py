@@ -7,6 +7,10 @@ class Bank(models.Model):
     city = models.CharField(max_length=255, default='')
     correspondent_account = models.IntegerField()
 
+    class Meta:
+        verbose_name = "Банк"
+        verbose_name_plural = "Банк"
+
     def __str__(self):
         return self.name
 
@@ -98,6 +102,7 @@ class CursValuta(models.Model):
     curs = models.FloatField()
     cursProd = models.FloatField()
     cursPokup = models.FloatField()
+
 
 class Session(models.Model):
     date = models.DateField()

@@ -153,7 +153,11 @@ class SessionsView(ListView):
 
 
 def operations_html(request):
-    list = Operation.objects.all()
+    contract_id = request.GET.get("contract_id")
+    if contract_id:
+        list = Operation.objects.filter(contract=contract_id)
+    else:
+        list = Operation.objects.all()
     context = {
         'list': list,
     }
@@ -171,4 +175,14 @@ def curs_valuta_html(request):
         'list': list,
     }
     html_template = loader.get_template('valut_curs.html')
+    return HttpResponse(html_template.render(context, request))
+
+
+def employees_info_html(request):
+
+    operations = Operation.objects.all()
+    context = {
+        'list': operations,
+    }
+    html_template = loader.get_template('employess_info.html')
     return HttpResponse(html_template.render(context, request))
