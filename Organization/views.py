@@ -6,6 +6,7 @@ from reportlab.pdfbase import ttfonts, pdfmetrics
 from reportlab.pdfgen import canvas
 from rest_framework.generics import ListAPIView
 from django.shortcuts import render
+from django.views.generic import ListView
 from .models import Valuta
 
 from .serializers import *
@@ -59,3 +60,45 @@ def get_org_sved_html(request):
     }
     html_template = loader.get_template('org_svedenye.html')
     return HttpResponse(html_template.render(context, request))
+
+
+def get_org_sved_html(request):
+    list = Organization.objects.all()
+    context = {
+        'list': list
+    }
+    html_template = loader.get_template('org_svedenye.html')
+    return HttpResponse(html_template.render(context, request))
+
+
+class OrganizationValutaAccountView(ListView):
+    model = OrganizationValutaAccount
+    template_name = 'organization_valuta_accounts.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(OrganizationValutaAccountView, self).get_context_data(**kwargs)
+        context['object_list_name'] = ["Код валюты", "Код Организации", "Номер валюты"]
+        context['name'] = "Валютные счета организации"
+        return context
+
+
+class EmployeesView(ListView):
+    model = Sotrudnik
+    template_name = 'employess.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(EmployeesView, self).get_context_data(**kwargs)
+        context['object_list_name'] = ["Код содтрудник", "ФИО сотрудник"]
+        context['name'] = "Сотрудники"
+        return context
+
+
+class CurrencyView(ListView):
+    model = Valuta
+    template_name = 'employess.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(CurrencyView, self).get_context_data(**kwargs)
+        context['object_list_name'] = ["Код Валюты", "Валюта"]
+        context['name'] = "Валюты"
+        return context
