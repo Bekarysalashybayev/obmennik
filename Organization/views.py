@@ -188,10 +188,11 @@ def employees_info_html(request):
 
 
 def operation_pokupki(request, id: int):
-
+    vid1 = "покупок" if int(id) == 2 else "продаж"
     operations = Session.objects.filter(operation__category_id=id)
     context = {
         'list': operations,
+        'vid1': vid1,
         'vid': "Покупки" if int(id) == 2 else "Продажи",
     }
     html_template = loader.get_template('operation_pokupki.html')
