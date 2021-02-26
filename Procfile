@@ -1,0 +1,1 @@
+web: gunicorn Obmennik.wsgi --log-file -
