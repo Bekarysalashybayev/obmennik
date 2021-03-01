@@ -13,7 +13,7 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-import django_heroku
+# import django_herokuz
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
