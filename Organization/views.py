@@ -1,15 +1,28 @@
 import io
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as auth_login
 
 from django.http import FileResponse, HttpResponse
 from django.template import loader
 from reportlab.pdfbase import ttfonts, pdfmetrics
 from reportlab.pdfgen import canvas
 from rest_framework.generics import ListAPIView
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import ListView
-from .models import Valuta
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
 
 from .serializers import *
+
+message_login = "Вам надо зайти"
+def is_autheticated_redirect(request):
+    user = request.user
+    print(user.is_authenticated)
+    if not user.is_authenticated:
+        print("ad")
+        return redirect("login_page")
 
 
 class UserInfoView(ListAPIView):
@@ -63,6 +76,9 @@ def get_org_sved_html(request):
 
 
 def get_org_sved_html(request):
+    if not request.user.is_authenticated:
+        messages.error(request, message_login)
+        return redirect("login_page")
     list = Organization.objects.all()
     context = {
         'list': list
@@ -71,40 +87,52 @@ def get_org_sved_html(request):
     return HttpResponse(html_template.render(context, request))
 
 
-class OrganizationValutaAccountView(ListView):
-    model = OrganizationValutaAccount
-    template_name = 'organization_valuta_accounts.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(OrganizationValutaAccountView, self).get_context_data(**kwargs)
-        context['object_list_name'] = ["Код валюты", "Код Организации", "Номер валюты"]
-        context['name'] = "Валютные счета организации"
-        return context
-
-
-class EmployeesView(ListView):
-    model = Sotrudnik
-    template_name = 'employess.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(EmployeesView, self).get_context_data(**kwargs)
-        context['object_list_name'] = ["Код содтрудник", "ФИО сотрудник"]
-        context['name'] = "Сотрудники"
-        return context
+def organization_valuta_account(request):
+    if not request.user.is_authenticated:
+        messages.error(request, message_login)
+        return redirect("login_page")
+    object_list = OrganizationValutaAccount.objects.all()
+    context = {
+        "object_list": object_list,
+        "object_list_name": ["Код валюты", "Код Организации", "Номер валюты"],
+        "name": "Валютные счета организации"
+    }
+    html_template = loader.get_template('organization_valuta_accounts.html')
+    return HttpResponse(html_template.render(context, request))
 
 
-class CurrencyView(ListView):
-    model = Valuta
-    template_name = 'currency.html'
+def employess(request):
+    if not request.user.is_authenticated:
+        messages.error(request, message_login)
+        return redirect("login_page")
+    object_list = Sotrudnik.objects.all()
+    context = {
+        "object_list": object_list,
+        "object_list_name": ["Код содтрудник", "ФИО сотрудник"],
+        "name": "Сотрудники"
+    }
+    html_template = loader.get_template('employess.html')
+    return HttpResponse(html_template.render(context, request))
 
-    def get_context_data(self, **kwargs):
-        context = super(CurrencyView, self).get_context_data(**kwargs)
-        context['object_list_name'] = ["Код Валюты", "Валюта"]
-        context['name'] = "Валюты"
-        return context
+
+def currency(request):
+    if not request.user.is_authenticated:
+        messages.error(request, message_login)
+        return redirect("login_page")
+    object_list = Valuta.objects.all()
+    context = {
+        "object_list": object_list,
+        "object_list_name": ["Код Валюты", "Валюта"],
+        "name": "Валюты"
+    }
+    html_template = loader.get_template('currency.html')
+    return HttpResponse(html_template.render(context, request))
 
 
 def clients_html(request):
+    if not request.user.is_authenticated:
+        messages.error(request, message_login)
+        return redirect("login_page")
     list = Client.objects.all()
     context = {
         'list': list
@@ -114,6 +142,9 @@ def clients_html(request):
 
 
 def valut_clients_html(request):
+    if not request.user.is_authenticated:
+        messages.error(request, message_login)
+        return redirect("login_page")
     list = ClientValutaAccount.objects.all()
     context = {
         'list': list
@@ -123,6 +154,9 @@ def valut_clients_html(request):
 
 
 def banks_html(request):
+    if not request.user.is_authenticated:
+        messages.error(request, message_login)
+        return redirect("login_page")
     list = Bank.objects.all()
     context = {
         'list': list
@@ -132,6 +166,9 @@ def banks_html(request):
 
 
 def dogovor_html(request):
+    if not request.user.is_authenticated:
+        messages.error(request, message_login)
+        return redirect("login_page")
     list = Contract.objects.all()
     context = {
         'list': list,
@@ -140,19 +177,24 @@ def dogovor_html(request):
     return HttpResponse(html_template.render(context, request))
 
 
-class SessionsView(ListView):
-    model = Session
-    template_name = 'sessions.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(SessionsView, self).get_context_data(**kwargs)
-        context['object_list_name'] = ["Дата сессии", "Код сотрудник"]
-        context['name'] = "Сессии"
-
-        return context
+def session(request):
+    if not request.user.is_authenticated:
+        messages.error(request, message_login)
+        return redirect("login_page")
+    object_list = Session.objects.all()
+    context = {
+        "object_list": object_list,
+        "object_list_name": ["Дата сессии", "Код сотрудник"],
+        "name": "Сессии"
+    }
+    html_template = loader.get_template('currency.html')
+    return HttpResponse(html_template.render(context, request))
 
 
 def operations_html(request):
+    if not request.user.is_authenticated:
+        messages.error(request, message_login)
+        return redirect("login_page")
     contract_id = request.GET.get("contract_id")
     if contract_id:
         list = Operation.objects.filter(contract=contract_id)
@@ -166,6 +208,9 @@ def operations_html(request):
 
 
 def curs_valuta_html(request):
+    if not request.user.is_authenticated:
+        messages.error(request, message_login)
+        return redirect("login_page")
     valute_id = request.GET.get('valute_id')
     if valute_id:
         list = CursValuta.objects.filter(code_valuta_id=valute_id)
@@ -179,6 +224,9 @@ def curs_valuta_html(request):
 
 
 def employees_info_html(request):
+    if not request.user.is_authenticated:
+        messages.error(request, message_login)
+        return redirect("login_page")
     operations = Operation.objects.all()
     context = {
         'list': operations,
@@ -188,6 +236,9 @@ def employees_info_html(request):
 
 
 def operation_pokupki(request, id: int):
+    if not request.user.is_authenticated:
+        messages.error(request, message_login)
+        return redirect("login_page")
     vid1 = "покупок" if int(id) == 2 else "продаж"
     operations = Session.objects.filter(operation__category_id=id)
     context = {
@@ -197,3 +248,21 @@ def operation_pokupki(request, id: int):
     }
     html_template = loader.get_template('operation_pokupki.html')
     return HttpResponse(html_template.render(context, request))
+
+
+def login_page(request):
+    if request.method == "GET":
+        return render(request, 'login.html', {})
+
+
+@csrf_exempt
+def login(request):
+    if request.method == "POST":
+        phone = request.POST.get('username')
+        password = request.POST.get('password')
+        user = authenticate(request, username=phone, password=password)
+        if user is not None:
+            auth_login(request, user)
+            return redirect("get_org_sved_html")
+        messages.error(request, "Логин либо пароль неверный")
+    return redirect("login_page")

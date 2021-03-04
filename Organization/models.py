@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.validators import UnicodeUsernameValidator
 
 
 class Bank(models.Model):
@@ -23,13 +25,25 @@ class Valuta(models.Model):
         return self.name
 
 
-class Client(models.Model):
+class Client(AbstractUser):
     code = models.IntegerField(primary_key=True)
-    fio = models.CharField(max_length=500, default='')
+    username_validator = UnicodeUsernameValidator()
+    username = models.CharField(
+        max_length=150,
+        unique=True,
+        validators=[username_validator],
+        null=True
+    )
+    password = models.CharField(max_length=128, default='')
+    # fio = models.CharField(max_length=500, default='')
     passport = models.CharField(max_length=50, default='', unique=True)
 
     def __str__(self):
-        return self.fio
+        return "".join([self.first_name, self.last_name, 'Username'])
+
+    class Meta:
+        verbose_name = "Client"
+        verbose_name_plural = "Clients"
 
 
 class ClientValutaAccount(models.Model):
