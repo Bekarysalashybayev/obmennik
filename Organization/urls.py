@@ -1,11 +1,18 @@
 from django.conf.urls import url
 from django.urls import path
-
+from django.shortcuts import redirect
+from django.contrib.auth import logout
 from .views import *
+
+# def logout_view(request):
+#     logout(request)
+#     return redirect()
+
 
 urlpatterns = [
     path('login-page/', login_page, name="login_page"),
     path('login/', login, name="login"),
+    path('logout/', login, name="logout"),
     path('userinfo/', UserInfoView.as_view(), name='GetUserInfo'),
     path('base/', get_base_html, name='get_base_html'),
     path('organization/svedeniye/', get_org_sved_html, name='get_org_sved_html'),
