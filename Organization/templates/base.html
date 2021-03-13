@@ -26,6 +26,30 @@
   <link rel="stylesheet" href="{% static 'plugins/daterangepicker/daterangepicker.css'%}">
   <!-- summernote -->
   <link rel="stylesheet" href="{% static 'plugins/summernote/summernote-bs4.min.css'%}">
+<style>
+@font-face {
+font-family: Verdana;
+src: url({% static 'assets/fonts/Roboto-BlackItalic.ttf' %});
+}
+body {
+font-family: 'Roboto';
+font-size: 11pt;}
+.printable{
+    display: none;
+}
+@media print {
+    .no-printable {
+        display: none;
+    }
+    .printable{
+        display: unset;
+    }
+    .card-body{
+        margin-left: 15%;
+        width: 70%;
+    }
+}
+</style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -231,13 +255,11 @@
               </li>
             </ul>
           </li>
-          <li class="nav-header">События</li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon far fa-calendar-alt"></i>
-              <p>
-                Календарь
-                <span class="badge badge-info right">2</span>
+            <a href="" class="nav-link">
+              <i class="nav-icon"></i>
+              <p style="color: indianred">
+                Выйти
               </p>
             </a>
           </li>
@@ -257,7 +279,7 @@
       </div>
  </section>
 </div>
-  <footer class="main-footer">
+  <footer class="main-footer no-printable">
     <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">

@@ -1,59 +1,31 @@
-import io
+import os
+
+from django.template import loader
+from django.template.loader import get_template
+from django.views import View
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 
-from django.http import FileResponse, HttpResponse
-from django.template import loader
-from reportlab.pdfbase import ttfonts, pdfmetrics
-from reportlab.pdfgen import canvas
+from django.http import HttpResponse
 from rest_framework.generics import ListAPIView
 from django.shortcuts import render, redirect
-from django.views.generic import ListView
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-
-
 from .serializers import *
 
 message_login = "Вам надо зайти"
+
+
 def is_autheticated_redirect(request):
     user = request.user
     print(user.is_authenticated)
     if not user.is_authenticated:
-        print("ad")
         return redirect("login_page")
 
 
 class UserInfoView(ListAPIView):
     serializer_class = OperationSerializer
     queryset = Operation.objects.all()
-
-
-def some_view(request):
-    serializer = OperationSerializer(Operation.objects.all(), many=True)
-    queryset = serializer.data
-
-    response = HttpResponse()
-    response['Content-Disposition'] = 'attachment; filename=somefilename.pdf'
-    p = canvas.Canvas(response)
-    MyFontObject = ttfonts.TTFont('Arial', 'arial.ttf')
-    pdfmetrics.registerFont(MyFontObject)
-    i = 10
-    for query in queryset:
-        p.drawString(100, 350 + i, query['contract']['date'])
-        p.drawString(180, 350 + i, query['contract']['client']['fio'])
-        p.drawString(300, 350 + i, query['category'])
-        i = i + 10
-        print(query['category'])
-
-    # Close the PDF object cleanly, and we're done.
-    p.showPage()
-    p.save()
-
-    # FileResponse sets the Content-Disposition header so that browsers
-    # present the option to save the file.
-    return response
 
 
 def get_base_html(request):
