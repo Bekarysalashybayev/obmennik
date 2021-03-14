@@ -48,9 +48,9 @@ def get_org_sved_html(request):
 
 
 def get_org_sved_html(request):
-    # if not request.user.is_authenticated:
-    #     messages.error(request, message_login)
-    #     return redirect("login_page")
+    if not request.user.is_authenticated:
+        messages.error(request, message_login)
+        return redirect("login_page")
     list = Organization.objects.all()
     context = {
         'list': list,
