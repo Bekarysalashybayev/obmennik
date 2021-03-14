@@ -76,12 +76,13 @@ def get_org_sved_html(request):
 
 
 def get_org_sved_html(request):
-    if not request.user.is_authenticated:
-        messages.error(request, message_login)
-        return redirect("login_page")
+    # if not request.user.is_authenticated:
+    #     messages.error(request, message_login)
+    #     return redirect("login_page")
     list = Organization.objects.all()
     context = {
-        'list': list
+        'list': list,
+        "user": request.user
     }
     html_template = loader.get_template('org_svedenye.html')
     return HttpResponse(html_template.render(context, request))
@@ -134,6 +135,8 @@ def clients_html(request):
         messages.error(request, message_login)
         return redirect("login_page")
     list = Client.objects.all()
+    # if not request.user.is_superuser:
+    #     list = list.filter(client)
     context = {
         'list': list
     }
@@ -146,6 +149,8 @@ def valut_clients_html(request):
         messages.error(request, message_login)
         return redirect("login_page")
     list = ClientValutaAccount.objects.all()
+    if not request.user.is_superuser:
+        list = list.filter(code_client=request.user)
     context = {
         'list': list
     }
@@ -170,6 +175,8 @@ def dogovor_html(request):
         messages.error(request, message_login)
         return redirect("login_page")
     list = Contract.objects.all()
+    if not request.user.is_superuser:
+        list = list.filter(code_client=request.user)
     context = {
         'list': list,
     }
@@ -200,6 +207,8 @@ def operations_html(request):
         list = Operation.objects.filter(contract=contract_id)
     else:
         list = Operation.objects.all()
+        if not request.user.is_superuser:
+            list = list.filter(contract__code_client=request.user)
     context = {
         'list': list,
     }
@@ -228,8 +237,11 @@ def employees_info_html(request):
         messages.error(request, message_login)
         return redirect("login_page")
     operations = Operation.objects.all()
+    if not request.user.is_superuser:
+        operations = Operation.objects.filter(contract__code_client=request.user)
     context = {
         'list': operations,
+        'user': request.user
     }
     html_template = loader.get_template('employess_info.html')
     return HttpResponse(html_template.render(context, request))
@@ -266,3 +278,5 @@ def login(request):
             return redirect("get_org_sved_html")
         messages.error(request, "Логин либо пароль неверный")
     return redirect("login_page")
+
+

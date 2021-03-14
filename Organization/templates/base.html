@@ -75,7 +75,7 @@
           <img src="{% static 'dist/img/user2-160x160.jpg' %}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Админ</a>
+          <a href="#" class="d-block">{{ request.user.first_name }} {{ request.user.last_name }}</a>
         </div>
       </div>
 
@@ -92,6 +92,7 @@
               </p>
             </a>
           </li>
+            {% if request.user.is_superuser %}
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
@@ -127,6 +128,7 @@
               </li>
             </ul>
           </li>
+            {% endif %}
             <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
@@ -136,24 +138,28 @@
               </p>
             </a>
             <ul class="nav nav-treeview">
+             {% if request.user.is_superuser %}
               <li class="nav-item">
                 <a href="{% url 'clients_html' %}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Клиенты</p>
                 </a>
               </li>
+            {% endif %}
               <li class="nav-item">
                 <a href="{% url 'valut_clients_html' %}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Валютные счета клиентов</p>
                 </a>
               </li>
+                {% if request.user.is_superuser %}
               <li class="nav-item">
                 <a href="{% url 'banks_html' %}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Банки</p>
                 </a>
               </li>
+                {% endif %}
             </ul>
           </li>
             <li class="nav-item">
@@ -179,6 +185,7 @@
               </li>
             </ul>
           </li>
+          {% if request.user.is_superuser %}
             <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
@@ -202,6 +209,7 @@
               </li>
             </ul>
           </li>
+        {% endif %}
             <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
@@ -217,18 +225,22 @@
                   <p>Информация о клиентах</p>
                 </a>
               </li>
+                {% if request.user.is_superuser %}
               <li class="nav-item">
                 <a href="{% url 'operation_pokupki' id=1 %}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Операции продаж</p>
                 </a>
               </li>
+              {% endif %}
+              {% if request.user.is_superuser %}
               <li class="nav-item">
                 <a href="{% url 'operation_pokupki' id=2 %}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Операции покупок</p>
                 </a>
               </li>
+                {% endif %}
             </ul>
           </li>
           <li class="nav-header">События</li>
