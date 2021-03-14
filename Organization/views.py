@@ -247,7 +247,7 @@ def login(request):
         user = authenticate(request, username=phone, password=password)
         if user is not None:
             auth_login(request, user)
-            return redirect("get_org_sved_html")
+            return redirect("valut_clients_html")
         messages.error(request, "Логин либо пароль неверный")
     return redirect("login_page")
 
