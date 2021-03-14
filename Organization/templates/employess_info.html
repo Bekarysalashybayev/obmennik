@@ -1,19 +1,37 @@
 {% extends 'base.html' %}
 
 {% block content %}
+ <div class="printable">
+    <div class="row">
+        <div class="col-md-9">
+            <p style="font-weight: bolder; font-size: 16px;word-spacing: 15px;">ТOO "Валют операция"</p>
+            <p style="font-weight: bolder; font-size: 16px;word-spacing: 15px;">Адрес Абая25/8,Алматы</p>
+            <p style="font-weight: bolder; font-size: 16px;word-spacing: 15px;">Тел +7-747-365-45-85</p>
+        </div>
+        <div class="col-md-3">
+            <p style="font-weight: bolder; font-size: 16px;word-spacing: 15px;">PYK 456584</p>
+            <p style="font-weight: bolder; font-size: 16px;word-spacing: 15px;">БИК 852534</p>
+            <p style="font-weight: bolder; font-size: 16px;word-spacing: 15px;">ИИИ 856485</p>
+        </div>
+    </div>
+    <div class="text-center" style="margin-top: 150px;">
+        <h2>Информация о клиентах</h2>
+    </div>
+     <hr>
+ </div>
   <div class="row">
+
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Отчет Информация о клиентах</h3>
+                <h3 class="card-title no-printable">Отчет Информация о клиентах</h3>
 
                 <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
-                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
 
                     <div class="input-group-append">
-                      <button type="submit" class="btn btn-default">
-                        <i class="fas fa-search"></i>
+                      <button type="button" class="btn btn-lg btn-primary no-printable" onclick="window.print();">
+                          Скачать отчет
                       </button>
                     </div>
                   </div>
@@ -53,4 +71,33 @@
             <!-- /.card -->
           </div>
         </div>
+  <div class="printable footer1">
+  <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <p style="font-weight: bolder; font-size: 16px;">Руководитель</p>
+            </div>
+            <div class="col-md-6"><p style=" font-size: 16px;">Сергей Иванов Павлович</p></div>
+            <div class="col-md-2"><p>Подпись</p>
+                <hr style="margin-top: -15px;">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <p style="font-weight: bolder; font-size: 16px;">Гл. Бухгалтер</p>
+            </div>
+            <div class="col-md-6"><p style=" font-size: 16px;">Алия Оралова Сериккызы</p></div>
+            <div class="col-md-2"><p>Подпись</p>
+                <hr style="margin-top: -15px;">
+            </div>
+        </div>
+    </div>
+  </div>
+
 {% endblock %}
