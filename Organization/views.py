@@ -67,8 +67,8 @@ def organization_valuta_account(request):
     object_list = OrganizationValutaAccount.objects.all()
     context = {
         "object_list": object_list,
-        "object_list_name": ["Код валюты", "Код Организации", "Номер валюты"],
-        "name": "Валютные счета организации"
+        "object_list_name": ["Валюта коды", "Ұйымның коды", "Валюта нөмірі"],
+        "name": "Ұйымның валюталық шоттары"
     }
     html_template = loader.get_template('organization_valuta_accounts.html')
     return HttpResponse(html_template.render(context, request))
@@ -81,8 +81,8 @@ def employess(request):
     object_list = Sotrudnik.objects.all()
     context = {
         "object_list": object_list,
-        "object_list_name": ["Код содтрудник", "ФИО сотрудник"],
-        "name": "Сотрудники"
+        "object_list_name": ["Қызметкер коды", "ФИО"],
+        "name": "Қызметкерлер"
     }
     html_template = loader.get_template('employess.html')
     return HttpResponse(html_template.render(context, request))
@@ -95,8 +95,8 @@ def currency(request):
     object_list = Valuta.objects.all()
     context = {
         "object_list": object_list,
-        "object_list_name": ["Код Валюты", "Валюта"],
-        "name": "Валюты"
+        "object_list_name": ["Валюта коды", "Валюта"],
+        "name": "Валюталар"
     }
     html_template = loader.get_template('currency.html')
     return HttpResponse(html_template.render(context, request))
@@ -163,8 +163,8 @@ def session(request):
     object_list = Session.objects.all()
     context = {
         "object_list": object_list,
-        "object_list_name": ["Дата сессии", "Код сотрудник"],
-        "name": "Сессии"
+        "object_list_name": ["Сессия күні", "Қызметкер коды"],
+        "name": "Сессиялар"
     }
     html_template = loader.get_template('currency.html')
     return HttpResponse(html_template.render(context, request))
@@ -228,7 +228,7 @@ def operation_pokupki(request, id: int):
     context = {
         'list': operations,
         'vid1': vid1,
-        'vid': "Покупки" if int(id) == 2 else "Продажи",
+        'vid': "Сатып алу" if int(id) == 2 else "Продажи",
     }
     html_template = loader.get_template('operation_pokupki.html')
     return HttpResponse(html_template.render(context, request))

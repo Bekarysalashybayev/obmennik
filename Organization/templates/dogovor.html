@@ -5,7 +5,7 @@
           <div class="col-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Договоры</h3>
+                <h3 class="card-title">Келісім-шарттар</h3>
 
                 <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
@@ -24,9 +24,9 @@
                 <table class="table table-hover text-nowrap">
                   <thead>
                     <tr>
-                      <th>Номер договора</th>
-                      <th>Дата договора</th>
-                      <th>Операций этого договора</th>
+                      <th>Келісім-шарт номері</th>
+                      <th>Келісім-шарт уақыты</th>
+                      <th>Осы келісімшарттың әрекеттері</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -34,7 +34,7 @@
                     <tr>
                       <td>{{ item.pk }}</td>
                       <td>{{ item.date }}</td>
-                      <td><a href="/obmennik/operations/?contract_id={{ item.pk }}">Операции</a></td>
+                      <td><a href="/obmennik/operations/?contract_id={{ item.pk }}">Операциялар</a></td>
                     </tr>
                   {% endfor %}
                   </tbody>

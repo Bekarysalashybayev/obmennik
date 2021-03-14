@@ -112,8 +112,7 @@ font-size: 11pt;}
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Приборная панель
-              </p>
+Прибор панелі              </p>
             </a>
           </li>
             {% if request.user.is_superuser %}
@@ -121,7 +120,7 @@ font-size: 11pt;}
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-table"></i>
               <p>
-                Организация
+                Ұйым
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -129,25 +128,25 @@ font-size: 11pt;}
               <li class="nav-item">
                 <a href="{% url 'get_org_sved_html' %}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Сведения об организации</p>
+                  <p>Ұйым туралы мәліметтер</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{% url 'organization_valuta_accounts' %}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Валютные счета организации</p>
+                  <p>Ұйымның валюталық шоттары</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{% url 'employees' %}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Сотрудники организации</p>
+                  <p>Ұйым қызметкерлері</p>
                 </a>
               </li>
                 <li class="nav-item">
                 <a href="{% url 'currency' %}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Валюты</p>
+                  <p>Валюталар</p>
                 </a>
               </li>
             </ul>
@@ -157,7 +156,7 @@ font-size: 11pt;}
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user"></i>
               <p>
-                Работа с клиентами
+               Клиенттермен жұмыс
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -166,21 +165,21 @@ font-size: 11pt;}
               <li class="nav-item">
                 <a href="{% url 'clients_html' %}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Клиенты</p>
+                  <p>Клиенттер</p>
                 </a>
               </li>
             {% endif %}
               <li class="nav-item">
                 <a href="{% url 'valut_clients_html' %}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Валютные счета клиентов</p>
+                  <p>Клиенттердің валютадағы шоттары</p>
                 </a>
               </li>
                 {% if request.user.is_superuser %}
               <li class="nav-item">
                 <a href="{% url 'banks_html' %}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Банки</p>
+                  <p>Банктер</p>
                 </a>
               </li>
                 {% endif %}
@@ -190,7 +189,7 @@ font-size: 11pt;}
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
-                Работа с договорами
+                Келісім-шарттармен жұмыс
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -198,13 +197,13 @@ font-size: 11pt;}
               <li class="nav-item">
                 <a href="{% url 'dogovor_html' %}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Договоры</p>
+                  <p>Келісім-шарттар</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{% url 'operations_html' %}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Операции</p>
+                  <p>Операциялар</p>
                 </a>
               </li>
             </ul>
@@ -214,7 +213,7 @@ font-size: 11pt;}
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>
-                Начало работы с БД
+               ДБ жұмысты бастау
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -222,13 +221,13 @@ font-size: 11pt;}
               <li class="nav-item">
                 <a href="{% url 'sessions' %}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Сессии</p>
+                  <p>Сессиялар</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{% url 'curs_valuta_html' %}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Курсы валют</p>
+                  <p>Валюта бағамдары</p>
                 </a>
               </li>
             </ul>
@@ -238,7 +237,7 @@ font-size: 11pt;}
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
-                Отчеты
+                Есептер
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -246,14 +245,14 @@ font-size: 11pt;}
               <li class="nav-item">
                 <a href="{% url 'employees_info' %}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Информация о клиентах</p>
+                  <p>Тұтынушылар туралы ақпарат</p>
                 </a>
               </li>
                 {% if request.user.is_superuser %}
               <li class="nav-item">
                 <a href="{% url 'operation_pokupki' id=1 %}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Операции продаж</p>
+                  <p>Сату операциялары</p>
                 </a>
               </li>
               {% endif %}
@@ -261,7 +260,7 @@ font-size: 11pt;}
               <li class="nav-item">
                 <a href="{% url 'operation_pokupki' id=2 %}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Операции покупок</p>
+                  <p>Сатып алу операциялары</p>
                 </a>
               </li>
                 {% endif %}
@@ -271,7 +270,7 @@ font-size: 11pt;}
             <a href="{% url 'logout' %}" class="nav-link">
               <i class="nav-icon"></i>
               <p style="color: indianred">
-                Выйти
+                Шығу
               </p>
             </a>
           </li>
