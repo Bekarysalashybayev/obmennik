@@ -31,8 +31,8 @@
                   <tbody>
                   {% for item in object_list %}
                     <tr>
-                      <td>{{ item.code }}</td>
-                      <td>{{ item.name }}</td>
+                      <td>{{ item.date }}</td>
+                      <td>{{ item.sotrudnik.code }}</td>
                     <td><a href="/obmennik/curs_valuta/?valute_id={{ item.pk }}">Валюта Курсы </a></td>
                     </tr>
                   {% endfor %}
