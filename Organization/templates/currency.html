@@ -31,8 +31,17 @@
                   <tbody>
                   {% for item in object_list %}
                     <tr>
-                      <td>{{ item.date }}</td>
-                      <td>{{ item.sotrudnik.code }}</td>
+
+                        {% if item.code  %}
+                            <td>{{ item.code }}</td>
+                        {% else %}
+                            <td>{{ item.date }}</td>
+                        {% endif %}
+                    {% if item.sotrudnik.code  %}
+                        <td>{{ item.sotrudnik.code }}</td>
+                    {% else %}
+                      <td>{{ item.name }}</td>
+                    {% endif %}
                     <td><a href="/obmennik/curs_valuta/?valute_id={{ item.pk }}">Валюта Курсы </a></td>
                     </tr>
                   {% endfor %}
